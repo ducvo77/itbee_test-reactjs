@@ -17,6 +17,8 @@ import Typography from '@mui/material/Typography'
 import { alpha, styled } from '@mui/material/styles'
 import * as React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../app/hook'
+import { searchActions, searchValue } from '../features/searchSlice'
 import ModeButton from './ModeButton'
 
 const pages = ['Front End', 'Product', 'Blog']
@@ -69,6 +71,9 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
+
+  const dispatch = useAppDispatch()
+  const value = useAppSelector(searchValue)
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
@@ -195,7 +200,11 @@ function Header() {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
+              value={value}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                dispatch(searchActions.enterValue(e.target.value))
+              }
             />
           </Search>
 
