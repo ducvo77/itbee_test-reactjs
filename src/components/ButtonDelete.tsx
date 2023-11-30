@@ -45,13 +45,10 @@ export default function ButtonDelete({ contactId }: { contactId: number }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancle</Button>
-          <Button
-            onClick={handleDelete}
-            autoFocus
-            variant="contained"
-            color="error"
-          >
+          <Button onClick={handleClose} autoFocus>
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} variant="contained" color="error">
             Delete
           </Button>
         </DialogActions>

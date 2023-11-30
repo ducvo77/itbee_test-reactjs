@@ -8,7 +8,7 @@ export default function MainLayout({
   children: React.ReactNode
 }) {
   return (
-    <Box sx={{ height: '100vh', width: '100%' }}>
+    <Box sx={{ minHeight: '100vh', width: '100%' }}>
       <Header />
       <Container sx={{ marginTop: '40px', padding: '0 20px' }}>
         {children}

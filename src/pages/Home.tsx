@@ -1,4 +1,3 @@
-import AddIcon from '@mui/icons-material/Add'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
@@ -13,13 +12,15 @@ import ButtonDelete from '../components/ButtonDelete'
 import MainLayout from '../components/MainLayout'
 import { dataContact } from '../features/contactSlice'
 import { searchValue } from '../features/searchSlice'
+import ButtonAddContact from '../components/ButtonAddContact'
+import { Link as RouterLink } from 'react-router-dom'
+import Link from '@mui/material/Link'
 
 export default function HomePage() {
   const data: Contact[] = useAppSelector(dataContact)
   const value = useAppSelector(searchValue)
-
   const dataFilterByName = data.filter((item) =>
-    item.name.toLowerCase().includes(value.toLowerCase())
+    item?.name.toLowerCase().includes(value?.toLowerCase())
   )
 
   return (
@@ -32,9 +33,8 @@ export default function HomePage() {
           alignItems: 'end',
         }}
       >
-        <Button startIcon={<AddIcon />} variant="contained" color="success">
-          Add Contact
-        </Button>
+        <ButtonAddContact />
+
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -67,7 +67,10 @@ export default function HomePage() {
                           justifyContent: 'center',
                         }}
                       >
-                        <Button variant="outlined">Edit</Button>
+                        <Link component={RouterLink} to={'/edit/' + contact.id}>
+                          <Button variant="outlined">Edit</Button>
+                        </Link>
+
                         <ButtonDelete contactId={contact.id} />
                       </Box>
                     </TableCell>
